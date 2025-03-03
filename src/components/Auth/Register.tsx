@@ -9,7 +9,6 @@ import {
   Group,
   Paper,
   PasswordInput,
-  Text,
   TextInput,
   Title,
 } from "@mantine/core";
