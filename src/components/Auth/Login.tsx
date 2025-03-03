@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { AuthErrorCodes, signInWithEmailAndPassword } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { AuthErrorCodes, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Anchor,
   Button,
@@ -8,16 +8,15 @@ import {
   Group,
   Paper,
   PasswordInput,
-  Text,
   TextInput,
   Title,
-} from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { notifications } from '@mantine/notifications';
-import { auth } from '@/firebase';
-import { signInWithGoogle } from '@/utils/authUtils';
-import { FacebookButton } from './ui/Facebook';
-import { GoogleButton } from './ui/Google';
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
+import { auth } from "@/firebase";
+import { signInWithGoogle } from "@/utils/authUtils";
+import { FacebookButton } from "./ui/Facebook";
+import { GoogleButton } from "./ui/Google";
 
 interface Credentials {
   email: string;
@@ -29,8 +28,8 @@ export const Login = () => {
 
   const form = useForm<Credentials>({
     initialValues: {
-      email: 'aymenfreelancer1@gmail.com',
-      password: '1234567',
+      email: "",
+      password: "",
     },
   });
   const handleSubmit = async () => {
@@ -38,37 +37,44 @@ export const Login = () => {
     setLoading(true);
     try {
       // Register the user with Firebase Authentication
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
       // Success notification
       notifications.show({
-        title: 'Login Successful',
+        title: "Login Successful",
         message: `Welcome ${user.email}!`,
-        color: 'green',
+        color: "green",
         autoClose: 3000,
-        position: 'bottom-right',
+        position: "bottom-right",
       });
-      navigate('/dashboard');
+      navigate("/dashboard");
       console.log(user);
     } catch (error: any) {
       if (error.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
-        form.setFieldError('email', 'Invalid credentials. Please check your email and password.');
         form.setFieldError(
-          'password',
-          'Invalid credentials. Please check your email and password.'
+          "email",
+          "Invalid credentials. Please check your email and password."
+        );
+        form.setFieldError(
+          "password",
+          "Invalid credentials. Please check your email and password."
         );
       } else if (error.code === AuthErrorCodes.USER_DELETED) {
-        form.setFieldError('email', 'No user found with this email.');
+        form.setFieldError("email", "No user found with this email.");
       } else if (error.code === AuthErrorCodes.INVALID_PASSWORD) {
-        form.setFieldError('password', 'The password is incorrect.');
+        form.setFieldError("password", "The password is incorrect.");
       } else {
         notifications.show({
-          title: 'Login Failed',
-          message: 'An unexpected error occurred. Please try again later.',
-          color: 'red',
+          title: "Login Failed",
+          message: "An unexpected error occurred. Please try again later.",
+          color: "red",
           autoClose: 3000,
-          position: 'top-right',
+          position: "top-right",
         });
       }
     } finally {
@@ -78,10 +84,10 @@ export const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const user = await signInWithGoogle();
-      console.log('User logged in:', user);
-      navigate('/dashboard');
+      console.log("User logged in:", user);
+      navigate("/dashboard");
     } catch (error) {
-      console.error('Google Sign-In Error:', error);
+      console.error("Google Sign-In Error:", error);
     }
   };
   return (
@@ -96,16 +102,24 @@ export const Login = () => {
           </GoogleButton>
           <FacebookButton radius="sm">Facebook</FacebookButton>
         </Group>
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
-        <TextInput label="Email" placeholder="Enter your email" {...form.getInputProps('email')} />
+        <Divider
+          label="Or continue with email"
+          labelPosition="center"
+          my="lg"
+        />
+        <TextInput
+          label="Email"
+          placeholder="Enter your email"
+          {...form.getInputProps("email")}
+        />
         <PasswordInput
           label="Password"
           placeholder="Enter your password"
           mt="md"
-          {...form.getInputProps('password')}
+          {...form.getInputProps("password")}
         />
         <Group mt="sm">
-          <Anchor component={Link} to={'/forgot-password'} size="sm">
+          <Anchor component={Link} to={"/forgot-password"} size="sm">
             Forgot password?
           </Anchor>
         </Group>

@@ -12,7 +12,6 @@ interface Credentials {
 
 export const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const form = useForm<Credentials>({
     initialValues: {

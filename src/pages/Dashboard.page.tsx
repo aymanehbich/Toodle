@@ -1,6 +1,5 @@
-import React from 'react';
-import { Card, Text, Title } from '@mantine/core';
-import TodoChart from '@/components/Todos/TodoChart';
+import { Card, Text, Title } from "@mantine/core";
+import TodoChart from "@/components/Todos/TodoChart";
 
 // const TodoChart = React.lazy(() => import('@/components/Todos/TodoChart'));
 
