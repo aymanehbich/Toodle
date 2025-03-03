@@ -78,7 +78,7 @@ export function CustomLogo({ size = 30, type = 'full', ...props }: CustomLogoPro
             
           }}
         >
-          Todo
+          Toodle
         </span>
       )}
     </div>

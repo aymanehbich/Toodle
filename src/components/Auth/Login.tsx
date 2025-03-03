@@ -88,7 +88,7 @@ export const Login = () => {
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Paper withBorder shadow="md" p={30} radius="md">
         <Title order={2} fw={700} ta="center">
-          Welcome to Todo, login with
+          Welcome to Toodle, login with
         </Title>
         <Group grow mt="md">
           <GoogleButton radius="sm" onClick={handleGoogleSignIn}>

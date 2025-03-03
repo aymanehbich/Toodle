@@ -171,7 +171,7 @@ export const Register = () => {
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Paper withBorder shadow="md" p={30} radius="md">
         <Text size="xl" fw={700} ta="center">
-          Welcome to Mantine, register with
+          Welcome to Toodle, register with
         </Text>
         <Group grow mt="md">
           <GoogleButton radius="sm" onClick={handleGoogleRegister}>
