@@ -79,7 +79,10 @@ const MainLayout: React.FC = () => {
             <Menu shadow="md" width={170}>
               <Menu.Target>
                 <Avatar
-                  style={{ border: "1px solid grey", cursor: "pointer" }}
+                  style={{
+                    border: "1px solid var(--mantine-primary-color-7)",
+                    cursor: "pointer",
+                  }}
                   src={user?.photoURL}
                   alt={user?.displayName || "User"}
                   size={37}

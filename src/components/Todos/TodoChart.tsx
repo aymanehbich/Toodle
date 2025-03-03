@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { BarChart } from '@mantine/charts';
-import { Center, Loader } from '@mantine/core';
-import { db } from '@/firebase';
-import { Todo } from '@/types/Todos';
+import { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { BarChart } from "@mantine/charts";
+import { Center, Loader } from "@mantine/core";
+import { db } from "@/firebase";
+import { Todo } from "@/types/Todos";
 
 const TodoChart = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -13,8 +13,8 @@ const TodoChart = () => {
   const userId = auth.currentUser?.uid;
   // Fetch todos from Firestore
   useEffect(() => {
-    console.log('Setting up todos listener for user:', userId);
-    const q = query(collection(db, 'todos'), where('userId', '==', userId));
+    console.log("Setting up todos listener for user:", userId);
+    const q = query(collection(db, "todos"), where("userId", "==", userId));
     // Use onSnapshot instead of getDocs for real-time updates
     const unsubscribe = onSnapshot(
       q,
@@ -23,12 +23,12 @@ const TodoChart = () => {
           id: doc.id,
           ...doc.data(),
         })) as Todo[];
-        console.log('Todos updated:', todosList);
+        console.log("Todos updated:", todosList);
         setTodos(todosList);
         setLoading(false);
       },
       (error) => {
-        console.error('Error fetching todos:', error);
+        console.error("Error fetching todos:", error);
         setLoading(false);
       }
     );
@@ -40,18 +40,18 @@ const TodoChart = () => {
   // Transform todos into data for the BarChart
   const groupTodosByMonth = (todos: Todo[]) => {
     const monthsOfYear = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
 
     const grouped: { [key: string]: { total: number; completed: number } } = {};
@@ -59,7 +59,7 @@ const TodoChart = () => {
     // Loop through the todos and group them by month and year
     todos.forEach((todo) => {
       const date = new Date(todo.createdAt);
-      const month = date.toLocaleString('default', { month: 'long' });
+      const month = date.toLocaleString("default", { month: "long" });
       const year = date.getFullYear();
       const key = `${month} ${year}`;
 
@@ -102,8 +102,8 @@ const TodoChart = () => {
       data={todosData}
       dataKey="month" // The key for the x-axis
       series={[
-        { name: 'todos', label: 'Total Todos', color: 'blue.6' }, // Total todos
-        { name: 'completed', label: 'Completed Todos', color: 'green.6' }, // Completed todos
+        { name: "todos", label: "Total Todos" }, // Total todos
+        { name: "completed", label: "Completed Todos", color: "green.8" }, // Completed todos
       ]}
       withLegend
       xAxisLabel="Months"

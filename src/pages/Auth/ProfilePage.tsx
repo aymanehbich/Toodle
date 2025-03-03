@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-import { getAuth, updatePassword, updateProfile } from 'firebase/auth';
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { getAuth, updatePassword, updateProfile } from "firebase/auth";
 import {
   Avatar,
   Button,
@@ -12,16 +12,16 @@ import {
   Text,
   TextInput,
   Title,
-} from '@mantine/core';
-import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { useForm } from '@mantine/form';
-import { Notifications } from '@mantine/notifications';
-import { useAuth } from '@/context/AuthProvider';
+} from "@mantine/core";
+import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { useForm } from "@mantine/form";
+import { Notifications } from "@mantine/notifications";
+import { useAuth } from "@/context/AuthProvider";
 
 export const ProfilePage = () => {
   const { user } = useAuth();
   const [selectedFile, setSelectedFile] = useState<FileWithPath | null>(null);
-  const [previewUrl, setPreviewUrl] = useState(user?.photoURL || '');
+  const [previewUrl, setPreviewUrl] = useState(user?.photoURL || "");
   const [isEmailPasswordUser, setIsEmailPasswordUser] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -29,16 +29,17 @@ export const ProfilePage = () => {
   const form = useForm({
     initialValues: {
       full_name: user?.displayName,
-      email: user?.email || '',
-      current_password: '',
-      new_password: '',
-      confirm_new_password: '',
+      email: user?.email || "",
+      current_password: "",
+      new_password: "",
+      confirm_new_password: "",
     },
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      new_password: (value) => (value.length < 6 ? 'Password must be at least 6 characters' : null),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      new_password: (value) =>
+        value.length < 6 ? "Password must be at least 6 characters" : null,
       confirm_new_password: (value, values) =>
-        value !== values.new_password ? 'Passwords do not match' : null,
+        value !== values.new_password ? "Passwords do not match" : null,
     },
   });
 
@@ -52,7 +53,7 @@ export const ProfilePage = () => {
     if (currentUser) {
       // Access providerData from auth.currentUser
       const isEmailPassword = currentUser.providerData.some(
-        (provider) => provider.providerId === 'password'
+        (provider) => provider.providerId === "password"
       );
       setIsEmailPasswordUser(isEmailPassword);
     }
@@ -71,7 +72,7 @@ export const ProfilePage = () => {
   const handleCancel = () => {
     setPreviewUrl(initialImageUrl.current);
     setSelectedFile(null);
-    form.setFieldValue('full_name', user?.displayName);
+    form.setFieldValue("full_name", user?.displayName);
   };
 
   const handleSaveChanges = async () => {
@@ -79,7 +80,7 @@ export const ProfilePage = () => {
     const { full_name, new_password } = form.values;
 
     if (!auth.currentUser) {
-      alert('No user is currently signed in.');
+      alert("No user is currently signed in.");
       return;
     }
 
@@ -89,19 +90,19 @@ export const ProfilePage = () => {
     if (selectedFile) {
       try {
         const formData = new FormData();
-        formData.append('file', selectedFile);
-        formData.append('upload_preset', 'TESTIMAGE');
-        formData.append('cloud_name', 'dhygauckf');
+        formData.append("file", selectedFile);
+        formData.append("upload_preset", "TESTIMAGE");
+        formData.append("cloud_name", "dhygauckf");
 
         const response = await axios.post(
-          'https://api.cloudinary.com/v1_1/dhygauckf/image/upload',
+          "https://api.cloudinary.com/v1_1/dhygauckf/image/upload",
           formData
         );
 
         photoURL = response.data.secure_url;
       } catch (error) {
-        console.error('Error uploading image to Cloudinary:', error);
-        alert('An error occurred while uploading the image.');
+        console.error("Error uploading image to Cloudinary:", error);
+        alert("An error occurred while uploading the image.");
         setLoading(false);
         return;
       }
@@ -118,13 +119,13 @@ export const ProfilePage = () => {
       }
 
       Notifications.show({
-        title: 'Profile Updated',
-        message: 'Your profile has been updated successfully.',
-        color: 'green',
+        title: "Profile Updated",
+        message: "Your profile has been updated successfully.",
+        color: "green",
       });
     } catch (error) {
-      console.error('Error updating profile:', error);
-      alert('An error occurred while updating the profile.');
+      console.error("Error updating profile:", error);
+      alert("An error occurred while updating the profile.");
     } finally {
       setLoading(false); // Stop loading state
     }
@@ -132,10 +133,10 @@ export const ProfilePage = () => {
 
   return (
     <Container size={1000} my={20}>
-      <Title order={3} mb={10}>
+      <Title order={2} mb={10}>
         Update Account Information
       </Title>
-      <Paper withBorder shadow="md" p={30} radius="md">
+      <Paper withBorder p={30}>
         <Center>
           <Dropzone
             p={0}
@@ -145,18 +146,18 @@ export const ProfilePage = () => {
             accept={IMAGE_MIME_TYPE}
             onDrop={handleFileDrop}
           >
-            <Avatar src={previewUrl} alt={user?.displayName || ''} size={100} />
+            <Avatar src={previewUrl} alt={user?.displayName || ""} size={100} />
           </Dropzone>
         </Center>
         <Text size="sm" c="dimmed" ta="center" mt="md">
-          Upload Profile Picture by clicking on the Avatar
+          Upload Profile Picture by clicking on the Image above
         </Text>
 
         <Group grow mt="md">
           <TextInput
             label="Full Name"
             placeholder="Enter your full name"
-            {...form.getInputProps('full_name')}
+            {...form.getInputProps("full_name")}
           />
         </Group>
         <Group grow>
@@ -164,7 +165,7 @@ export const ProfilePage = () => {
             label="Email"
             placeholder="Enter email"
             mt="md"
-            {...form.getInputProps('email')}
+            {...form.getInputProps("email")}
             disabled
           />
         </Group>
@@ -177,19 +178,19 @@ export const ProfilePage = () => {
                 label="New Password"
                 placeholder="Enter new password"
                 mt="md"
-                {...form.getInputProps('new_password')}
+                {...form.getInputProps("new_password")}
               />
               <PasswordInput
                 label="Confirm New Password"
                 placeholder="Confirm new password"
                 mt="md"
-                {...form.getInputProps('confirm_new_password')}
+                {...form.getInputProps("confirm_new_password")}
               />
             </Group>
           </>
         )}
 
-        <Group mt={20}>
+        <Group grow justify="end" mt={20}>
           <Button variant="outline" onClick={handleCancel}>
             Cancel
           </Button>
