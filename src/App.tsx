@@ -49,11 +49,7 @@ export default function App() {
           <Route
             path="/register"
             element={
-              isAuthenticated && !loading ? (
-                <Navigate to="/dashboard" />
-              ) : (
-                <RegisterPage />
-              )
+              isAuthenticated ? <Navigate to="/dashboard" /> : <RegisterPage />
             }
           />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
