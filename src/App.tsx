@@ -24,7 +24,7 @@ import { TodosPage } from "./pages/Todos.page";
 import { theme } from "./theme";
 
 export default function App() {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated } = useAuth();
   return (
     <MantineProvider theme={theme}>
       <Notifications />
