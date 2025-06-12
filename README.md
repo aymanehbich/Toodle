@@ -1,66 +1,81 @@
-# Todo Application Overview
+# 📝 Todo Application
 
-This is a comprehensive Todo application built with **React**, **TypeScript**, and **Firebase**. The application provides a modern, responsive user interface using **Mantine UI** components and offers complete user authentication flow along with task management capabilities.
+A comprehensive Todo application built with **React**, **TypeScript**, and **Firebase**. It features a modern, responsive interface using **Mantine UI**, full user authentication, and real-time task management.
 
-## Core Features
+[![Live Preview](https://img.shields.io/badge/Live%20Preview-%F0%9F%9A%80-blue?style=for-the-badge)](https://toodle-hbich.vercel.app/)
 
-### Authentication System
+---
 
-- **Multiple Sign-in Methods:** Email/password and Google authentication
-- **User Registration:** New users can create accounts with email or social providers
-- **Password Management:** Includes forgot/reset password functionality
-- **Protected Routes:** Authenticated access to app features
+## 🔐 Authentication System
 
-### Task Management
+- **Multiple Sign-in Methods:** Email/password and Google
+- **User Registration:** Create accounts with email or Google
+- **Password Management:** Forgot/reset password
+- **Protected Routes:** Secure pages accessible only to logged-in users
 
-- **Todo Creation:** Users can create new tasks
-- **Task Manipulation:** Edit, delete, and mark tasks as complete/incomplete
-- **Real-time Updates:** Changes sync with Firebase in real-time
-- **Default Todos:** New users receive starter todo items
+## ✅ Task Management
 
-### Dashboard & Analytics
+- **Create Todos:** Add new tasks
+- **Edit/Delete:** Update or remove tasks
+- **Mark Complete/Incomplete**
+- **Real-time Sync:** Tasks update instantly via Firebase
+- **Default Todos:** Starter todos for new users
 
-- **Visual Statistics:** Chart visualization of todos created by month
-- **Completed vs. Total:** Visual breakdown of completed versus pending tasks
-- **Real-time Data:** Dashboard updates as todo status changes
+## 📊 Dashboard & Analytics
 
-### User Profile
+- **Monthly Stats:** Charts for todos created per month
+- **Progress Breakdown:** Completed vs pending tasks
+- **Live Dashboard:** Updates in real-time
 
-- **Profile Management:** Users can update their profile information
-- **Avatar Upload:** Support for profile picture uploads to Cloudinary
-- **Password Change:** Email/password users can update their credentials
+## 👤 User Profile
 
-## Technical Architecture
+- **Profile Management:** Update name/email info
+- **Avatar Upload:** Upload profile images via Cloudinary
+- **Password Change:** Secure password updates
+
+## ⚙️ Technical Architecture
 
 ### Frontend
 
-- **Framework:** React with TypeScript
-- **Routing:** React Router v7 for navigation
-- **UI Components:** Mantine UI library
-- **Form Handling:** Mantine form hooks
-- **Notifications:** Toast notifications for user feedback
-- **Data Visualization:** Recharts for analytics dashboards
+- **Framework:** React + TypeScript
+- **Routing:** React Router v7
+- **UI Library:** Mantine UI
+- **Forms:** Mantine hooks
+- **Notifications:** Toast alerts
+- **Charts:** Recharts for analytics
 
 ### Backend & Data
 
-- **Authentication:** Firebase Authentication
-- **Database:** Firestore for data storage
-- **File Storage:** Cloudinary for image uploads
-- **Real-time Updates:** Firestore listeners for live data
+- **Auth:** Firebase Authentication
+- **Database:** Firestore (real-time)
+- **File Uploads:** Cloudinary for image storage
 
-## Project Structure
+## 🗂️ Project Structure
 
-- **Component Organization:** Well-structured component hierarchy
-- **Context API:** Authentication state management
-- **Layouts:** Main layout with navigation sidebar
-- **Pages:** Separate page components for each route
-- **Types:** TypeScript interfaces for type safety
+- **Component Hierarchy:** Modular structure
+- **Context API:** Global auth state management
+- **Layouts:** Shared layouts with sidebar/nav
+- **Pages:** Per-route component files
+- **Types:** TypeScript interfaces for safety
 
-## User Experience Flow
+## 🚀 User Experience Flow
 
-1. **Authentication:** Users start at login/register screens
-2. **Dashboard:** After authentication, they see todo statistics
-3. **Todo Management:** Create, edit, and delete todos on the todo page
-4. **Profile:** Access profile settings to customize their experience
+1. **Authentication:** Start from login or register
+2. **Dashboard:** View real-time stats and charts
+3. **Todo Page:** Create, update, manage todos
+4. **Profile Settings:** Customize user info and avatar
 
-The application follows modern React practices with hooks, Context API for state management, and a clean, component-based architecture that separates concerns for better maintainability.
+---
+
+## 📍 Live Demo
+
+Click here to try it out:  
+👉 **[Toodle App Live](https://toodle-hbich.vercel.app/)**
+
+## 🧑‍💻 Tech Stack
+
+```bash
+Frontend: React, TypeScript, Mantine, Recharts  
+Backend: Firebase Auth, Firestore  
+Media: Cloudinary  
+Deployment: Vercel
