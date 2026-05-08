@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import {
   collection,
   doc,
-  getDocs,
+  onSnapshot,
   query,
   setDoc,
   where,
@@ -44,30 +44,26 @@ export const Todos = () => {
   });
 
   useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        if (userId) {
-          const q = query(
-            collection(db, "todos"),
-            where("userId", "==", userId)
-          );
-          const querySnapshot = await getDocs(q);
-          const todosList: Todo[] = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          })) as Todo[];
-          todosList.map((todo) => {
-            console.log("ID", todo.id);
-          });
-          setTodos(todosList);
-        }
-      } catch (error) {
+    if (!userId) return;
+
+    const q = query(collection(db, "todos"), where("userId", "==", userId));
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const todosList: Todo[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Todo[];
+        setTodos(todosList);
+        setLoading(false);
+      },
+      (error) => {
         console.error("Error fetching todos:", error);
-      } finally {
         setLoading(false);
       }
-    };
-    fetchTodos();
+    );
+
+    return () => unsubscribe();
   }, [userId]);
   const handleAddTodo = async () => {
     const { todoTitle } = form.getValues();
@@ -80,7 +76,6 @@ export const Todos = () => {
         createdAt: new Date().toISOString(),
         userId: userId,
       };
-      setTodos((prevTodos) => [...prevTodos, newTodo]);
       form.setFieldValue("todoTitle", "");
       close();
       try {

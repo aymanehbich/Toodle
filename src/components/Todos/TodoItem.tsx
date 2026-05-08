@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import {
@@ -26,6 +26,10 @@ export const TodoItem = memo(({ todo }: { todo: Todo }) => {
       completed: todo.completed,
     },
   });
+  useEffect(() => {
+    form.setValues({ todoTitle: todo.todoTitle, completed: todo.completed });
+  }, [todo.todoTitle, todo.completed]);
+
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
